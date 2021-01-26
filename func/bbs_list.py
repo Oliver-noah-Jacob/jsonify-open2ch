@@ -34,16 +34,18 @@ def read_main(s: requests.Session)->dict:
         "resp" : dict(res.headers),
     }
 
-def read_board(s: requests.Session, name: str, mode="main")->Optional[dict]:
-    if mode == "main":
-        print("read main board")
-        bbs_dict=read_main(s)["main"]
-    elif mode == "opunu":
-        print("read opunu board")
-        bbs_dict=read_opunu(s)["opunu"]
-    else:
-        print(f"Invalid mode: {mode}")
-        return f"Invalid mode: {mode}"
+def read_board(s: requests.Session, name: str)->Optional[dict]:
+    #if mode == "main":
+    #    print("read main board")
+    #    bbs_dict=read_main(s)["main"]
+    #elif mode == "opunu":
+    #    print("read opunu board")
+    #    bbs_dict=read_opunu(s)["opunu"]
+    #else:
+    #    print(f"Invalid mode: {mode}")
+    #    return f"Invalid mode: {mode}"
+    bbs_dict = read_main(s)["main"]
+    bbs_dict.update(read_opunu(s)["opunu"])
 
     print(bbs_dict)
     if name in bbs_dict.keys():

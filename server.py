@@ -16,6 +16,12 @@ cached_session = CacheControl(raw_s, cache=FileCache('.webcache'))
 def root():
     return "42"
 
+@app.route("/bbslist")
+def bbs_all():
+    bbs = bbs_list.read_main(cached_session)["main"]
+    bbs.update(bbs_list.read_opunu(cached_session)["opunu"])
+    return jsonify(bbs)
+
 @app.route("/bbslist/opunu")
 def bbs_opunu():
     return jsonify(bbs_list.read_opunu(cached_session))
@@ -24,17 +30,11 @@ def bbs_opunu():
 def bbs_main():
     return jsonify(bbs_list.read_main(cached_session))
 
-@app.route("/subject", methods=["POST"])
+@app.route("/subject", methods=["get"])
 def subject():
-    payload = request.json
-    name = payload.get("name")
-    mode = payload.get("mode")
-    print(f"name : {name}, mode : {mode}")
-    return bbs_list.read_board(
-        cached_session,
-        name,
-        mode
-    )
+    name = request.args.get("name")
+    print(f"name : {name}")
+    return bbs_list.read_board(cached_session, name)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
