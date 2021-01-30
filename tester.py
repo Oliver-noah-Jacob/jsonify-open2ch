@@ -23,6 +23,6 @@ if __name__ == "__main__":
     print("-*-*- BBS subject test -*-*-")
     for b in test_board:
         print(f"\nTEST {b}")
-        res = sess.get(url=url, params={"name" : b})
+        res = sess.get(url=url + '/' + b)
         data = json.loads(res.text)
         print(f"URL: {res.url}\n====\nresponce: {data}")

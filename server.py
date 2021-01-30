@@ -30,9 +30,9 @@ def bbs_opunu():
 def bbs_main():
     return jsonify(bbs_list.read_main(cached_session))
 
-@app.route("/subject", methods=["get"])
-def subject():
-    name = request.args.get("name")
+@app.route("/subject/<name>", methods=["get"])
+def subject(name=None):
+    #name = request.args.get("name")
     print(f"name : {name}")
     return bbs_list.read_board(cached_session, name)
 
