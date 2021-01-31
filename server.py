@@ -19,7 +19,9 @@ def bbs_opunu():
     return:
         json
     """
-    return jsonify(bbs_list.read_opunu(raw_s))
+    resp: td.OpenAccessReturn = bbs_list.read_opunu(raw_s)
+    print(resp)
+    return jsonify(resp.responce)
 
 @app.route("/bbslist/main")
 def bbs_main():
@@ -28,7 +30,9 @@ def bbs_main():
     return:
         json
     """
-    return jsonify(bbs_list.read_main(raw_s))
+    resp: td.OpenAccessReturn = bbs_list.read_main(raw_s)
+    print(resp)
+    return jsonify(resp.responce)
 
 @app.route("/bbs/<server>/<name>/subject", methods=["get"])
 def subject(server=None, name=None):
