@@ -34,7 +34,7 @@ def bbs_main():
     # return jsonify(bbs_list.read_main(cached_session))
     return jsonify(bbs_list.read_main(raw_s))
 
-@app.route("/subject/<name>", methods=["get"])
+@app.route("/bbs/<name>/subject", methods=["get"])
 def subject(name=None):
     #name = request.args.get("name")
     print(f"name : {name}")
