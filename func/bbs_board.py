@@ -27,7 +27,7 @@ def subject(sess: requests.Session, server: str, name: str) -> td.OpenAccessRetu
     """
 
     # access open2ch
-    url = f"http://{server}.open2ch.net/{name}/subject.txt"
+    url = f"https://{server}.open2ch.net/{name}/subject.txt"
     subject = sess.get(url=url)
 
     subject_dict = {
