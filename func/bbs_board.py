@@ -1,7 +1,7 @@
 from typing import Optional, Tuple
 import re
 
-from .typedef import *
+from . import typedef as td
 
 # for open2ch
 from cachecontrol import CacheControl 
@@ -14,7 +14,7 @@ re_dat=re.compile(r"(^[0-9]+\.dat).+")
 re_title=re.compile(r"<>(.+)\s\([0-9]+\)")
 re_count=re.compile(r"<>.+\s\(([0-9]+)\)")
 
-def subject(sess: requests.Session, server: str, name: str) -> OpenAccessReturn:
+def subject(sess: requests.Session, server: str, name: str) -> td.OpenAccessReturn:
     """Read subject.txt.
 
     parameters:
@@ -37,7 +37,7 @@ def subject(sess: requests.Session, server: str, name: str) -> OpenAccessReturn:
         } for s in subject.text.split('\n') if s
     }
 
-    return OpenAccessReturn(
+    return td.OpenAccessReturn(
         url=url,
         status_code=subject.status_code,
         responce=subject_dict
