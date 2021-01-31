@@ -18,27 +18,44 @@ def root():
 
 @app.route("/bbslist")
 def bbs_all():
-    # bbs = bbs_list.read_main(cached_session)["main"]
-    # bbs.update(bbs_list.read_opunu(cached_session)["opunu"])
+    """bbslist(main+opunu)
+
+    return:
+        json
+    """
     bbs = bbs_list.read_main(raw_s)["main"]
     bbs.update(bbs_list.read_opunu(raw_s)["opunu"])
     return jsonify(bbs)
 
 @app.route("/bbslist/opunu")
 def bbs_opunu():
-    # return jsonify(bbs_list.read_opunu(cached_session))
+    """bbslist(opunu)
+
+    return:
+        json
+    """
     return jsonify(bbs_list.read_opunu(raw_s))
 
 @app.route("/bbslist/main")
 def bbs_main():
-    # return jsonify(bbs_list.read_main(cached_session))
+    """return bbslist(main)
+
+    return:
+        json
+    """
     return jsonify(bbs_list.read_main(raw_s))
 
 @app.route("/bbs/<name>/subject", methods=["get"])
 def subject(name=None):
-    #name = request.args.get("name")
+    """return subject.txt in json format
+
+    parameters:
+        name(str): name of the board
+
+    return:
+        json
+    """
     print(f"name : {name}")
-    # return bbs_list.read_board(cached_session, name)
     return bbs_list.read_board(raw_s, name)
 
 if __name__ == '__main__':
