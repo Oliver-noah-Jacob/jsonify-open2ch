@@ -2,30 +2,15 @@ from flask import Flask, jsonify, request
 from func import bbs_list, bbs_board
 from func import typedef as td
 # for open2ch
-#from cachecontrol import CacheControl 
-#from cachecontrol.caches import FileCache
-import lxml.html
 import requests
 
 app = Flask(__name__)
 
 raw_s = requests.Session()
-#cached_session = CacheControl(raw_s, cache=FileCache('.webcache'))
 
 @app.route("/")
 def root():
     return "42"
-
-# @app.route("/bbslist")
-# def bbs_all():
-#     """bbslist(main+opunu)
-
-#     return:
-#         json
-#     """
-#     bbs = bbs_list.read_main(raw_s)["main"]
-#     bbs.update(bbs_list.read_opunu(raw_s)["opunu"])
-#     return jsonify(bbs)
 
 @app.route("/bbslist/opunu")
 def bbs_opunu():
