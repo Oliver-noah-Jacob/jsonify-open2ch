@@ -34,31 +34,31 @@ def read_main(s: requests.Session)->dict:
         "resp" : dict(res.headers),
     }
 
-def read_board(s: requests.Session, name: str)->Optional[dict]:
-    #if mode == "main":
-    #    print("read main board")
-    #    bbs_dict=read_main(s)["main"]
-    #elif mode == "opunu":
-    #    print("read opunu board")
-    #    bbs_dict=read_opunu(s)["opunu"]
-    #else:
-    #    print(f"Invalid mode: {mode}")
-    #    return f"Invalid mode: {mode}"
-    bbs_dict = read_main(s)["main"]
-    bbs_dict.update(read_opunu(s)["opunu"])
+# def read_board(s: requests.Session, name: str)->Optional[dict]:
+#     #if mode == "main":
+#     #    print("read main board")
+#     #    bbs_dict=read_main(s)["main"]
+#     #elif mode == "opunu":
+#     #    print("read opunu board")
+#     #    bbs_dict=read_opunu(s)["opunu"]
+#     #else:
+#     #    print(f"Invalid mode: {mode}")
+#     #    return f"Invalid mode: {mode}"
+#     bbs_dict = read_main(s)["main"]
+#     bbs_dict.update(read_opunu(s)["opunu"])
 
-    print(bbs_dict)
-    if name in bbs_dict.keys():
-        subject_url = bbs_dict[name] + "subject.txt"
-        print(f"{name} found -> {subject_url}")
-        res = s.get(subject_url)
-        subject_dict = {
-            re_title.search(s).group(1) : {
-                "dat" : re_dat.search(s).group(1),
-                "count" : re_count.search(s).group(1)
-            } for s in res.text.split("\n") if s
-        }
-        return jsonify(subject_dict)
-    else:
-        print(f"{name} not found")
-        return f"{name} not found"
+#     print(bbs_dict)
+#     if name in bbs_dict.keys():
+#         subject_url = bbs_dict[name] + "subject.txt"
+#         print(f"{name} found -> {subject_url}")
+#         res = s.get(subject_url)
+#         subject_dict = {
+#             re_title.search(s).group(1) : {
+#                 "dat" : re_dat.search(s).group(1),
+#                 "count" : re_count.search(s).group(1)
+#             } for s in res.text.split("\n") if s
+#         }
+#         return jsonify(subject_dict)
+#     else:
+#         print(f"{name} not found")
+#         return f"{name} not found"

@@ -16,16 +16,16 @@ raw_s = requests.Session()
 def root():
     return "42"
 
-@app.route("/bbslist")
-def bbs_all():
-    """bbslist(main+opunu)
+# @app.route("/bbslist")
+# def bbs_all():
+#     """bbslist(main+opunu)
 
-    return:
-        json
-    """
-    bbs = bbs_list.read_main(raw_s)["main"]
-    bbs.update(bbs_list.read_opunu(raw_s)["opunu"])
-    return jsonify(bbs)
+#     return:
+#         json
+#     """
+#     bbs = bbs_list.read_main(raw_s)["main"]
+#     bbs.update(bbs_list.read_opunu(raw_s)["opunu"])
+#     return jsonify(bbs)
 
 @app.route("/bbslist/opunu")
 def bbs_opunu():
