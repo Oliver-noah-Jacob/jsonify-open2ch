@@ -19,10 +19,13 @@ if __name__ == "__main__":
 
     # /subject test
     url = "http://0.0.0.0:5000"
-    test_board = ["Linux作る板","なんでも実況J", "河川・ダム等", "R-18"]
+    test_board = [
+        ("Linux作る板" ,"open", "1609418086"),
+        ("なんでも実況(ジュピター)", "hayabusa", "livejupiter")
+        ]
     print("-*-*- BBS subject test -*-*-")
     for b in test_board:
-        print(f"\nTEST {b}")
-        res = sess.get(url=f"{url}/bbs/{b}/subject")
+        print(f"\nTEST {b[0]}")
+        res = sess.get(url=f"{url}/bbs/{b[1]}/{b[2]}/subject")
         data = json.loads(res.text)
         print(f"URL: {res.url}\n====\nresponce: {data}")

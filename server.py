@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
-from func import bbs_list
-
+from func import bbs_list, bbs_board
+from func.typedef import *
 # for open2ch
 #from cachecontrol import CacheControl 
 #from cachecontrol.caches import FileCache
@@ -45,18 +45,13 @@ def bbs_main():
     """
     return jsonify(bbs_list.read_main(raw_s))
 
-@app.route("/bbs/<name>/subject", methods=["get"])
-def subject(name=None):
-    """return subject.txt in json format
-
-    parameters:
-        name(str): name of the board
-
-    return:
-        json
-    """
-    print(f"name : {name}")
-    return bbs_list.read_board(raw_s, name)
+@app.route("/bbs/<server>/<name>/subject", methods=["get"])
+def subject(server=None, name=None):
+    resp: OpenAccessReturn = bbs_board.subject(
+        raw_s, server, name
+    )
+    print(resp)
+    return jsonify(resp.responce)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
