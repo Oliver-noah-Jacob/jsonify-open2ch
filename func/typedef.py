@@ -12,7 +12,7 @@ import requests
 
 class OpenAccessReturn(NamedTuple):
     url: str
-    status_code: int
+    status_code: Literal[requests.status_codes]
     responce: dict
 
     def __str__(self) ->str:
@@ -38,4 +38,9 @@ PathSegments = Union[
 WritableMode = Literal[
     FileAccessMode.at, FileAccessMode.ab, 
     FileAccessMode.wt, FileAccessMode.wb,
+    FileAccessMode.xt, FileAccessMode.xb
     ]
+
+ReadableMode = Literal[
+    FileAccessMode.rt, FileAccessMode.rb
+]
