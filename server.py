@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from func import bbs_list, bbs_board
+from func import bbs_list, bbs_board, bbs_thread
 from func import typedef as td
 # for open2ch
 import requests
@@ -38,6 +38,14 @@ def bbs_main():
 def subject(server=None, name=None):
     resp: td.OpenAccessReturn = bbs_board.subject(
         raw_s, server, name
+    )
+    print(resp)
+    return jsonify(resp.responce)
+
+@app.route("/bbs/<server>/<name>/dat/<dat_key>", methods=["get"])
+def dat(server=None, name=None, dat_key=None):
+    resp: td.OpenAccessReturn = bbs_thread.read_dat(
+        raw_s, server, name, dat_key
     )
     print(resp)
     return jsonify(resp.responce)
